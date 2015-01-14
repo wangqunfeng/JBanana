@@ -14,7 +14,7 @@ public class JZipCom {
 		
 		String cmd = "D:\\Program Files\\7-Zip\\7z.exe";
         
-        //确保目录的路径最后面有"\"符号
+        //确保目录的路径最后面有"\"符号,啊~~
         if(destDirectory.charAt(destDirectory.length()-1) !='\\')
             destDirectory = destDirectory + "\\";
 
