@@ -58,7 +58,7 @@ public class JBanana extends JDialog {
 	 */
 	public JBanana() {
 		setBounds(100, 100, 610, 438);
-		setTitle("Ð¡Ïã½¶");
+		setTitle("Ð¡ÇÑ×Ó");
 		getContentPane().setLayout(null);
 
 		getContentPane().add(panelZip, BorderLayout.SOUTH);
