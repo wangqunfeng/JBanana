@@ -60,12 +60,13 @@ public class JBanana extends JDialog {
 	 * Create the dialog.
 	 */
 	public JBanana() {
-		setBounds(100, 100, 610, 438);
+	    setResizable(false);
+		setBounds(100, 100, 610, 401);
 		setTitle("Ð¡Ïã½¶");
 		getContentPane().setLayout(null);
 
 		getContentPane().add(panelZip, BorderLayout.SOUTH);
-		panelZip.setBounds(10, 10, 582, 166);
+		panelZip.setBounds(10, 10, 582, 176);
 		panelZip.setLayout(null);
 		panelZip.setBorder(BorderFactory.createTitledBorder("Ñ¹ËõÇø"));
 		

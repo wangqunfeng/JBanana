@@ -126,7 +126,8 @@ public class JZipCom {
      */
     public static boolean zip(String sourceFilePath, String zipFilePath, String passwd) {
         setMsg("Begin to zip " + sourceFilePath + " to " + zipFilePath + ".7z\n\r");
-        String cmd = "D:\\Program Files\\7-Zip\\7z.exe";
+//        String cmd = "D:\\Program Files\\7-Zip\\7z.exe";
+        String cmd = "plugin\\7z.exe";
         String suffix = new String("");
 
         // 提取文件扩展名与基本名
