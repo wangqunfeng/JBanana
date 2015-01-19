@@ -18,13 +18,20 @@ public class JZipCom {
      */
     public static boolean unzip(String zipFilePath, String destDirectory, String passwd, boolean delSrcZipFile) {
         setMsg("Begin to upzip " + zipFilePath + " to " + destDirectory + "\n\r");
-        String cmd = "D:\\Program Files\\7-Zip\\7z.exe";
+        String cmd = "plugin\\7z.exe";
 
         // 检查参数
         // 如果有密码，要求密码长度不少于6位
         if ((destDirectory == null || destDirectory.isEmpty()) || (zipFilePath == null || zipFilePath.isEmpty()) ||
             (passwd!=null && !passwd.isEmpty() && passwd.length()<6)) {
             setMsg(getMsg() + "Invalid arguments for 7zip!\n\r");
+            return false;
+        }
+
+        // 检查7zip.exe路径
+        if(!new File(cmd).isFile())
+        {
+            setMsg(getMsg() + "Invalid path for 7zip.exe");
             return false;
         }
 
@@ -108,6 +115,8 @@ public class JZipCom {
                     throw new Exception("Rename zipped file back fail!");
                 }
             }
+
+            setMsg(getMsg() + "UnZip file(s) finished!\n\r");
             // 执行到这里已经确定操作成功了
             return true;
         } catch (Exception e) {
@@ -125,8 +134,7 @@ public class JZipCom {
      * @throws 7zip执行时可能抛出异常
      */
     public static boolean zip(String sourceFilePath, String zipFilePath, String passwd) {
-        setMsg("Begin to zip " + sourceFilePath + " to " + zipFilePath + ".7z\n\r");
-//        String cmd = "D:\\Program Files\\7-Zip\\7z.exe";
+        setMsg("Begin to zip " + sourceFilePath + " to " + zipFilePath + "\n\r");
         String cmd = "plugin\\7z.exe";
         String suffix = new String("");
 
@@ -139,7 +147,7 @@ public class JZipCom {
         if (sourceFilePath == null || zipFilePath == null || suffix == null || sourceFilePath.isEmpty()
                 || zipFilePath.isEmpty() || suffix.length() < 2 || zipFilePath.lastIndexOf('\\') < 0
                 || suffix.indexOf('.') != 0 || (passwd!=null && !passwd.isEmpty() && passwd.length()<6)) {
-            setMsg(getMsg() + "Invalid arguments for Main::zip()" + "\n\r");
+            setMsg(getMsg() + "Invalid arguments for zip()" + "\n\r");
             return false;
         }
 
@@ -155,6 +163,13 @@ public class JZipCom {
                 setMsg(getMsg() + zipFilePath + " is not a valid dest path for zip" + "\n\r");
                 return false;
             }
+        }
+        
+        // 检查7zip.exe路径
+        if(!new File(cmd).isFile())
+        {
+            setMsg(getMsg() + "Invalid path for 7zip.exe");
+            return false;
         }
 
         // 尝试执行压缩、读取控制台输出信息、解析7zip进程返回值、 捕获异常
@@ -212,7 +227,7 @@ public class JZipCom {
         // 修改压缩文件扩展名
         File f1 = new File(zipFilePath + ".7z");
         if (!f1.renameTo(new File(zipFilePath + suffix))) {
-            setMsg(getMsg() + "Failed to rename zip file:" + zipFilePath + "\n\r");
+            setMsg(getMsg() + "Failed to rename zip file:" + zipFilePath + ".7z\n\r");
             return false;
         }
         setMsg(getMsg() + "Move " + zipFilePath + ".7z to " + zipFilePath + suffix + " OK!\n\r");
